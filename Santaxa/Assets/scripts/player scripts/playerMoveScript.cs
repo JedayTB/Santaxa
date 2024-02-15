@@ -18,6 +18,8 @@ public class playerMoveScript : MonoBehaviour
     private float dashCount = 3f;
     [SerializeField]
     private float dashCountDown;
+    private float dashDuration;
+
     public enum directionFacing
     {
         left = 0,
@@ -35,20 +37,30 @@ public class playerMoveScript : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
         dashCountDown += Time.deltaTime;
+        dashDuration -= Time.deltaTime;
+
+        if (dashDuration >= 0 && dashDuration < 1.5f) // I made it so there is now a hard dash duration, when the dash is over, velocity is reset
+        {
+            rb.velocity = Vector3.zero;
+            dashDuration = 0;
+            speed = 10f;
+        }
 
         Vector2 moveDirection = new Vector2(horizontalInput, verticalInput);
 
         if(Input.GetKeyDown(KeyCode.Space) && dashCountDown > dashCount){
             print("Should dash");
-            //doDash(dashChangeForce , moveDirection.normalized);
+            doDash(dashChangeForce , moveDirection.normalized);
         }
 
         moveDirection *= speed * Time.deltaTime;
         transform.Translate(moveDirection);
     }
     void doDash(float force, Vector2 dir){
-        rb.AddForce(dir * force, ForceMode2D.Impulse);
+        speed = 25f;
+        rb.AddForce(dir * force); // Got rid of the AddForce2D.Impuse as it allowed you do simply teleport through collision lol
         dashCountDown = 0;
+        dashDuration = 2f;
     }
     private void flip(int dir)
     {
