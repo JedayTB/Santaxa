@@ -10,6 +10,7 @@ public class hittableObject : MonoBehaviour
     //can get this value without to much trouble
     //but you know what?
     //fuck you
+    // hi there
     
     public virtual void onHit(int hitDamage){
         //Debug.Log($"{this.gameObject.name} was hit for {hitDamage}");
