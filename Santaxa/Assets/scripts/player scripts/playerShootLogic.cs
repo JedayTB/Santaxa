@@ -14,6 +14,10 @@ public class playerShootLogic : MonoBehaviour
     private void Start()
     {
         currentSettings = GetComponent<playerLoadout>();
+        if(currentSettings == null){
+            Debug.LogError($"{this.gameObject.tag} DOES NOT HAVE PLAYER LOADOUT");
+        }
+        cooldown = cooldownTimer; //Let's you dash at start
     }
     private void Update()
     {

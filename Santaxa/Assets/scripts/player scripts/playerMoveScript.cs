@@ -34,6 +34,8 @@ public class playerMoveScript : MonoBehaviour
     }
     void Update()
     {
+        //Change to get input innhere
+        //and put actual movement in fixed update
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
         dashCountDown += Time.deltaTime;

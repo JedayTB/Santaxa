@@ -9,7 +9,7 @@ public class gameStateManager : MonoBehaviour
     private  hpEventController playerHpEvent;
     public static playerLoadout playerLoadout;
     private static gameStateManager instance;
-
+    private playerUIController playerUICont;
     public static gameStateManager Instance{
         get{return instance;}
     }
@@ -33,12 +33,17 @@ public class gameStateManager : MonoBehaviour
         if(playerLoadout == null){
             Debug.LogError("PLAYER LOADOUIT NULL IN GSM");
         }
-        playerHpEvent = playerReference.GetComponent<hpEventController>();
+        playerUICont = playerReference.gameObject.GetComponent<playerUIController>();
+        if(playerUICont == null){
+            Debug.LogError("PLAYER UI NULL IN GSM");
+        }
+        playerHpEvent = playerReference.gameObject.GetComponent<hpEventController>();
+        
         waveCont.waveSpawnLogic(); // Start at beggining of game
     }
     public void playerOnHit(int playerHp){
-        string temp  = $"Hp: {playerHp}";
-        hpText.text = temp;
+        playerUICont.hpUIEvent();
         //print("player hit");
     }
+    
 }

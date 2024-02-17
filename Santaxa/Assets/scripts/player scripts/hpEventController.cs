@@ -10,7 +10,6 @@ public class hpEventController : hittableObject
     void Start()
     {
         GSM = gameStateManager.Instance;
-        GSM.playerOnHit(this.healthPoints); 
     }
     public override void onHit(int hitDamage)
     {
