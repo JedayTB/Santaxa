@@ -1,21 +1,22 @@
+using System.Buffers.Text;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class playerUIController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    //private SpriteRenderer sprite; //this sprite
-    public Transform HpBar; //good for now. Don't need to change colour
+
+    [SerializeField]
+    private Transform HpBar; //good for now. Don't need to change colour
+    
+    [SerializeField]
+    private Transform dashCoolDownBar;
     void Start()
     {
-        /*
-        sprite = GetComponent<SpriteRenderer>();
-        if(sprite == null){
-            Debug.Log($"{this.gameObject.name} is missing sprite renderer");
-        }
-        */
-        HpBar.localScale = Vector3.zero; // Only show if gerergb
+        //Only show in 
+
+        HpBar.gameObject.SetActive(false);
+        dashCoolDownBar.gameObject.SetActive(false);
     }
     //sprite.color = new Color (1, 0, 0, 1); 
     // Update is called once per frame
@@ -39,21 +40,30 @@ public class playerUIController : MonoBehaviour
             yield return null;
         }
     }
-    IEnumerator CoolDownBar(Transform otherSize ){
+    IEnumerator CoolDownBar(Transform otherSize, float coolDownTime){
+        otherSize.gameObject.SetActive(true);
         Vector3 beforeVal = otherSize.localScale;
         beforeVal.y = 0;
         otherSize.localScale = beforeVal;
         Vector3 growSize = beforeVal;
-        print("before for loop");
-        for(float size = 0; size <= 1; size += 0.1f){
-            growSize.y = size;
-            otherSize.localScale = growSize;
-            print($"yield run {size}");
+        //Yield Will Run every frame and complete one iteration of the for loop
+        //Without WaitForSeconds function, will run for 10 frames. 
+        float count = 0f;
+        print(coolDownTime);
+        while(count <= coolDownTime){
+            count += Time.deltaTime;
+            growSize.y = count / coolDownTime;
+            print(growSize.y);
+            otherSize.transform.localScale = growSize;
             yield return null;
         }
+        otherSize.gameObject.SetActive(false);
+        StopCoroutine(CoolDownBar(otherSize, coolDownTime));
+    }
+    public void dashCoolDown(float coolDownTime){
+        StartCoroutine(CoolDownBar(dashCoolDownBar, coolDownTime));
     }
     public void hpUIEvent(){
-        print("cghec for change");
-        StartCoroutine(CoolDownBar(HpBar));
+        //print("cghec for change");
     }
 }

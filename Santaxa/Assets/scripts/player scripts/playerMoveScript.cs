@@ -15,7 +15,7 @@ public class playerMoveScript : MonoBehaviour
     private float dashChangeForce = 150f;
     private Rigidbody2D rb;
     [SerializeField]
-    private float dashCount = 3f;
+    private const float dashCoolDown = 3f;
     [SerializeField]
     private float dashCountDown;
     private float dashDuration;
@@ -31,6 +31,7 @@ public class playerMoveScript : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        dashCountDown = dashCoolDown; //to dash right away
     }
     void Update()
     {
@@ -41,8 +42,10 @@ public class playerMoveScript : MonoBehaviour
         dashCountDown += Time.deltaTime;
         dashDuration -= Time.deltaTime;
 
-        if (dashDuration >= 0 && dashDuration < 1.5f) // I made it so there is now a hard dash duration, when the dash is over, velocity is reset
+        if (dashDuration >= 0 && dashDuration < 1.5f)
         {
+            // I made it so there is now a hard dash duration,
+            // when the dash is over, velocity is reset
             rb.velocity = Vector3.zero;
             dashDuration = 0;
             speed = 10f;
@@ -50,9 +53,10 @@ public class playerMoveScript : MonoBehaviour
 
         Vector2 moveDirection = new Vector2(horizontalInput, verticalInput);
 
-        if(Input.GetKeyDown(KeyCode.Space) && dashCountDown > dashCount){
+        if(Input.GetKeyDown(KeyCode.Space) && dashCountDown >= dashCoolDown){
             print("Should dash");
             doDash(dashChangeForce , moveDirection.normalized);
+            gameStateManager.Instance.playerOnDash(dashCoolDown);
         }
 
         moveDirection *= speed * Time.deltaTime;

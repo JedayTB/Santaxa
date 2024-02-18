@@ -41,6 +41,9 @@ public class gameStateManager : MonoBehaviour
         
         waveCont.waveSpawnLogic(); // Start at beggining of game
     }
+    public void playerOnDash(float waitTime){
+        playerUICont.dashCoolDown(waitTime);
+    }
     public void playerOnHit(int playerHp){
         playerUICont.hpUIEvent();
         //print("player hit");
