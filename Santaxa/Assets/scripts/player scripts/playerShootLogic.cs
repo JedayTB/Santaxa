@@ -10,6 +10,8 @@ public class playerShootLogic : MonoBehaviour
     [SerializeField]
     private float cooldownTimer;
 
+    public static bool bouncyBool = false; // i'm not gonna lie i have NO IDEA what static actually means all i know is it lets me reference it from other scripts LMAO
+
     private void Start()
     {
         currentSettings = GetComponent<playerLoadout>();
@@ -27,6 +29,12 @@ public class playerShootLogic : MonoBehaviour
             //ineficient. find event way to do.
             cooldownTimer = 0;
         }
+
+        if (Input.GetKeyDown(KeyCode.B)) // press b to bouncy
+        {
+            bouncyBool = !bouncyBool;
+            print("Bouncy is " + bouncyBool);
+        }
     }
     private void shootLogic()
     {
@@ -40,7 +48,7 @@ public class playerShootLogic : MonoBehaviour
 
         float valueToRoate = Mathf.Atan2(delta.y , delta.x);
         
-        Quaternion rotationForBullet = Quaternion.Euler(0, 0, Mathf.Rad2Deg * valueToRoate);
+        Quaternion rotationForBullet = Quaternion.Euler(0, 0, Mathf.Rad2Deg * valueToRoate - 90f);
 
         //print($"bullet quaternion {rotationForBullet}\n rotate val {valueToRoate}");
         playerBullet temp = Instantiate(currentBullet);
