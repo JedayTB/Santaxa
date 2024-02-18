@@ -16,16 +16,21 @@ public class playerUIController : MonoBehaviour
         dashCoolDownBar.gameObject.SetActive(false);
     }
     //sprite.color = new Color (1, 0, 0, 1); 
-    IEnumerator fadeOut(SpriteRenderer sprite)
+    IEnumerator fadeOut(scaleableBar sprite, float countDown)
     {        
-        Color opacity = new Color(1,1,1,1);
-        for (float alpha = 1f; alpha >= 0; alpha -= 0.1f)
-        {
-            opacity.a = alpha;
-            sprite.color = opacity;
+        sprite.gameObject.SetActive(true);
+        Color opacity = sprite.barSpriteRenderer.color;
+        opacity.a = 0;
+        float count = 0;
+        while(count <= countDown){
+            count += Time.deltaTime;
+            opacity.a = count;
+            sprite.barSpriteRenderer.color = opacity;
             yield return null;
         }
-        StopCoroutine(fadeOut(sprite));
+        
+        sprite.gameObject.SetActive(false);
+        StopCoroutine(fadeOut(sprite, countDown));
     }
     IEnumerator fadeIn(SpriteRenderer sprite)
     {        
@@ -49,7 +54,6 @@ public class playerUIController : MonoBehaviour
         while(count <= coolDownTime){
             count += Time.deltaTime;
             growSize.y = count / coolDownTime;
-            print(growSize.y);
             targetSize.transform.localScale = growSize;
             yield return null;
         }
@@ -57,14 +61,14 @@ public class playerUIController : MonoBehaviour
         StopCoroutine(CoolDownBar(targetSize, coolDownTime));
     }
     void hpBarLogic(scaleableBar targetBar, Vector2 hpValues){
-        targetBar.gameObject.SetActive(true);
         //Base value divided by current val
-        //(5 / 4) = 0.8 for example
-        float newSize = hpValues.x / hpValues.y;
+        //(4 / 5) = 0.8 for example
+        float newSize = hpValues.y / hpValues.x;
+        print(newSize);
         Vector3 newScale = targetBar.transform.localScale;
         newScale.y = newSize;
         targetBar.transform.localScale = newScale;
-        StartCoroutine(fadeOut(targetBar.barSpriteRenderer));
+        StartCoroutine(fadeOut(targetBar, 1f));
     }
     public void dashCoolDown(float coolDownTime){
         StartCoroutine(CoolDownBar(dashCoolDownBar.transform, coolDownTime));

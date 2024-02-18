@@ -54,7 +54,6 @@ public class playerMoveScript : MonoBehaviour
         Vector2 moveDirection = new Vector2(horizontalInput, verticalInput);
 
         if(Input.GetKeyDown(KeyCode.Space) && dashCountDown >= dashCoolDown){
-            print("Should dash");
             doDash(dashChangeForce , moveDirection.normalized);
             gameStateManager.Instance.playerOnDash(dashCoolDown);
         }

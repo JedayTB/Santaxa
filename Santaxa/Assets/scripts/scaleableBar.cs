@@ -8,6 +8,12 @@ public class scaleableBar : MonoBehaviour
     void Start()
     {
         barTransform = GetComponent<Transform>();
+        if(barTransform ==null){
+            Debug.Log($"{this.gameObject.name} is missing it's transform");
+        }
         barSpriteRenderer = GetComponent<SpriteRenderer>();
+        if(barSpriteRenderer == null){
+            Debug.Log($"{this.gameObject.name} is missing it's spriterenderer");
+        }
     }
 }
