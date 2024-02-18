@@ -7,7 +7,7 @@ public class playerLoadout : MonoBehaviour
     public int damage = 1;
     public float speed = 15f; //Base speed
     public int penetration = 1;
-    public float coolDown = 1f;
+    public float coolDown = 0.3f;
     private int gearPointsAmount = 5;
     public int gpAmount{
         get{return gearPointsAmount;}
@@ -25,6 +25,8 @@ public class playerLoadout : MonoBehaviour
     private Text damageTxt;
     [SerializeField]
     private Text penetetrationTxt;
+    [SerializeField]
+    private Text coolDownTxt;
 //End of var declaration
     void Start()
     {
@@ -43,6 +45,11 @@ public class playerLoadout : MonoBehaviour
                 break;
            case "speed":
                 speed += 1f;
+                break;
+            case "cd":
+            //As you allocate points to cooldown
+            //Make the cooldownvalue lower
+                coolDown = coolDown <= 0.01f?  coolDown = 0.01f: coolDown -= 0.02f;
                 break;
             default:
                 Debug.LogError($"typo. mispelled {attribute}");
@@ -67,6 +74,11 @@ public class playerLoadout : MonoBehaviour
             case "speed":
                 speed = speed <= 0? speed = 0: speed -=1 ;
                 gearLogic = (speed - 1) >= 0;
+                break;
+            case "cd":
+            //if you deallocate points to cooldown
+            //Make cooldown higher
+                coolDown += 0.02f;
                 break;
             default:
                 Debug.LogError($"typo. mispelled {attribute}");
@@ -96,5 +108,6 @@ public class playerLoadout : MonoBehaviour
         this.speedTxt.text = $"({this.speed})";
         this.damageTxt.text = $"({this.damage})";
         this.penetetrationTxt.text = $"({this.penetration})";
+        this.coolDownTxt.text = $"({this.coolDown})";
     }
 }

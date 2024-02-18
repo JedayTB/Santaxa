@@ -6,8 +6,7 @@ public class playerShootLogic : MonoBehaviour
     public playerBullet currentBullet;
 
     private playerLoadout currentSettings;
-    [SerializeField]
-    private float cooldown;
+    private float coolDown;
     [SerializeField]
     private float cooldownTimer;
 
@@ -17,16 +16,16 @@ public class playerShootLogic : MonoBehaviour
         if(currentSettings == null){
             Debug.LogError($"{this.gameObject.tag} DOES NOT HAVE PLAYER LOADOUT");
         }
-        cooldown = cooldownTimer; //Let's you dash at start
+        coolDown = currentSettings.coolDown;
     }
     private void Update()
     {
         cooldownTimer += Time.deltaTime;
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && cooldownTimer >= coolDown)
         {
             shootLogic();
             //ineficient. find event way to do.
-            this.cooldown = currentSettings.coolDown;
+            cooldownTimer = 0;
         }
     }
     private void shootLogic()
