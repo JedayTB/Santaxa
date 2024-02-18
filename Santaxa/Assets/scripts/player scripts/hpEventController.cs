@@ -15,12 +15,12 @@ public class hpEventController : hittableObject
     {
         base.onHit(hitDamage);
         //print(healthPoints);
-        GSM.playerOnHit(this.healthPoints);
+        GSM.playerOnHit(this.healthValues);
     }
     public override void subtractHealth(int healthDelta)
     {
-        this.healthPoints -= healthDelta;
-        if(healthPoints <= 0){
+        this.healthValues.y -= healthDelta;
+        if(healthValues.y <= 0){
             //end game screen here
             SceneManager.LoadScene("gameover");
         }

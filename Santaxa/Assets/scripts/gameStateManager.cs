@@ -15,7 +15,6 @@ public class gameStateManager : MonoBehaviour
     }
     [SerializeField]
     public static waveController waveCont;
-    
     void Start()
     {
         instance = this;
@@ -44,8 +43,8 @@ public class gameStateManager : MonoBehaviour
     public void playerOnDash(float waitTime){
         playerUICont.dashCoolDown(waitTime);
     }
-    public void playerOnHit(int playerHp){
-        playerUICont.hpUIEvent();
+    public void playerOnHit(Vector2 hpValues){
+        playerUICont.hpUIEvent(hpValues);
         //print("player hit");
     }
     
