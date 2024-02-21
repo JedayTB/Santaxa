@@ -25,7 +25,7 @@ public class waveController : MonoBehaviour
     [SerializeField]
     float generalOffset = 15f;
     float offsetVariation = 5f;
-    private int ballssack{
+    private int ballssack{  // ayo?????
         get{return ballssack;}
     }
     // Start is called before the first frame update

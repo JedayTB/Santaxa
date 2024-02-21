@@ -8,12 +8,15 @@ public class playerUIController : MonoBehaviour
     private scaleableBar HpBar; //good for now. Don't need to change colour
     [SerializeField]
     private scaleableBar dashCoolDownBar;
+    [SerializeField]
+    private scaleableBar AOECoolDownBar;
     void Start()
     {
         //Only show in 
 
         HpBar.gameObject.SetActive(false);
         dashCoolDownBar.gameObject.SetActive(false);
+        AOECoolDownBar.gameObject.SetActive(false);
     }
     //sprite.color = new Color (1, 0, 0, 1); 
     IEnumerator fadeOut(scaleableBar sprite, float countDown)
@@ -43,7 +46,7 @@ public class playerUIController : MonoBehaviour
         }
         StopCoroutine(fadeIn(sprite));
     }
-    IEnumerator CoolDownBar(Transform targetSize, float coolDownTime){
+    IEnumerator CoolDownBar(Transform targetSize, float coolDownTime){  // oh my lordy lord ty for making this generic
         targetSize.gameObject.SetActive(true);
         Vector3 beforeVal = targetSize.localScale;
         beforeVal.y = 0;
@@ -77,5 +80,10 @@ public class playerUIController : MonoBehaviour
     public void hpUIEvent(Vector2 hpValues){
         //print("cghec for change");
         hpBarLogic(HpBar, hpValues);
+    }
+
+    public void AOECoolDown(float coolDownTime)
+    {
+        StartCoroutine(CoolDownBar(AOECoolDownBar.transform, coolDownTime));
     }
 }

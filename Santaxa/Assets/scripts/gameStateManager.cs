@@ -47,5 +47,8 @@ public class gameStateManager : MonoBehaviour
         playerUICont.hpUIEvent(hpValues);
         //print("player hit");
     }
-    
+    public void playerOnAOE(float waitTime)
+    {
+        playerUICont.AOECoolDown(waitTime);
+    }
 }

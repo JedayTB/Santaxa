@@ -11,6 +11,9 @@ public class zombieScript : hittableObject
     private Vector2 moveDir;
     [SerializeField]
     private int damage = 1;
+
+    public bool isBeingKnocked = false;
+    private float knockTimer = 0.15f; // how long the knock lasts
     
     public int chanceToSpawn;
     void Start()
@@ -30,7 +33,22 @@ public class zombieScript : hittableObject
         moveDir = playerReference.transform.position - this.transform.position;
         moveDir.Normalize();
 
-        transform.Translate( moveDir * speed * Time.deltaTime);
+        if (isBeingKnocked)
+        {
+            transform.Translate(-moveDir * speed * 4 * Time.deltaTime);
+            knockTimer -= Time.deltaTime;
+
+            if (knockTimer <= 0f)
+            {
+                knockTimer = 0.15f;
+                isBeingKnocked = false;
+            }
+
+        }
+        else
+        {
+            transform.Translate(moveDir * speed * Time.deltaTime);
+        }
     }
     void OnCollisionEnter2D(Collision2D other)
     {

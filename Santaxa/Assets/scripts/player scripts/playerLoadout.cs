@@ -8,6 +8,11 @@ public class playerLoadout : MonoBehaviour
     public float speed = 15f; //Base speed
     public int penetration = 1;
     public float coolDown = 0.3f;
+
+    public int damageAOE = 3;
+    public Vector2 sizeAOE = new Vector2(6.6f, 3.6f); // goofy ahh starting numbers
+    public float coolDownAOE = 7f;
+
     private int gearPointsAmount = 5;
     public int gpAmount{
         get{return gearPointsAmount;}
@@ -27,6 +32,12 @@ public class playerLoadout : MonoBehaviour
     private Text penetetrationTxt;
     [SerializeField]
     private Text coolDownTxt;
+    [SerializeField]
+    private Text AOEDamageTxt;
+    [SerializeField]
+    private Text AOESizeTxt;
+    [SerializeField]
+    private Text AOECoolDownTxt;
 //End of var declaration
     void Start()
     {
@@ -43,13 +54,23 @@ public class playerLoadout : MonoBehaviour
             case "pen":
                 penetration  += 1;
                 break;
-           case "speed":
+            case "speed":
                 speed += 1f;
                 break;
             case "cd":
             //As you allocate points to cooldown
             //Make the cooldownvalue lower
                 coolDown = coolDown <= 0.01f?  coolDown = 0.01f: coolDown -= 0.02f;
+                break;
+            case "aoedamage":
+                damageAOE += 1;
+                break;
+            case "aoesize":
+                sizeAOE.x += 1;
+                sizeAOE.y += 1;
+                break;
+            case "aoecd":
+                coolDownAOE -= 0.5f;
                 break;
             default:
                 Debug.LogError($"typo. mispelled {attribute}");
@@ -80,6 +101,16 @@ public class playerLoadout : MonoBehaviour
             //Make cooldown higher
                 coolDown += 0.02f;
                 break;
+            case "aoedamage":
+                damageAOE -= 1;
+                break;
+            case "aoesize":
+                sizeAOE.x -= 1;
+                sizeAOE.y -= 1;
+                break;
+            case "aoecd":
+                coolDownAOE += 0.5f;
+                break;
             default:
                 Debug.LogError($"typo. mispelled {attribute}");
                 break;
@@ -109,5 +140,8 @@ public class playerLoadout : MonoBehaviour
         this.damageTxt.text = $"({this.damage})";
         this.penetetrationTxt.text = $"({this.penetration})";
         this.coolDownTxt.text = $"({this.coolDown})";
+        this.AOEDamageTxt.text = $"({this.damageAOE})";
+        this.AOESizeTxt.text = $"({this.sizeAOE})";
+        this.AOECoolDownTxt.text = $"({this.coolDownAOE})";
     }
 }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7127521653428215432}
   m_Layer: 0
   m_Name: zombo
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfbb4a4d9e8242548967bbebfa36bd87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoints: 1
+  healthValues: {x: 1, y: 1}
   speed: 5
   damage: 1
   chanceToSpawn: 75

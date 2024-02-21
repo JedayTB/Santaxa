@@ -8,6 +8,7 @@ TagManager:
   - waveManager
   - loadoutUI
   - cover
+  - enemy
   layers:
   - Default
   - TransparentFX
