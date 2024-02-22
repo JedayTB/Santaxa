@@ -38,12 +38,14 @@ public class musicController : MonoBehaviour
     {
         isBetweenWave = true;
         music.clip = songs[2];
+        music.Play();
     }
 
     public void SwitchToMain()
     {
         isBetweenWave = false;
         music.clip = songs[0];
+        music.Play();
         music.loop = false;
     }
 }
