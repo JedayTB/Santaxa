@@ -15,6 +15,8 @@ public class gameStateManager : MonoBehaviour
     }
     [SerializeField]
     public static waveController waveCont;
+    public playerShootLogic shootLogic;
+    public playerAOELogic aoeLogic;
     void Start()
     {
         instance = this;
@@ -37,8 +39,20 @@ public class gameStateManager : MonoBehaviour
             Debug.LogError("PLAYER UI NULL IN GSM");
         }
         playerHpEvent = playerReference.gameObject.GetComponent<hpEventController>();
-        
+
+        aoeLogic = playerReference.gameObject.GetComponent<playerAOELogic>();
+        if(aoeLogic == null)
+        {
+            Debug.LogError("PLAYER AOE LOGIC IS NULL IN GSM");
+        }
+        shootLogic = playerReference.gameObject.GetComponent<playerShootLogic>();
+        if(shootLogic == null)
+        {
+            Debug.LogError("PLAYER SHOOT LOGIC IS NULL");
+        }
         waveCont.waveSpawnLogic(); // Start at beggining of game
+
+
     }
     public void playerOnDash(float waitTime){
         playerUICont.dashCoolDown(waitTime);

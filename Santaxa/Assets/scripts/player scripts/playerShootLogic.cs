@@ -1,4 +1,3 @@
-using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 
 public class playerShootLogic : MonoBehaviour
@@ -6,7 +5,8 @@ public class playerShootLogic : MonoBehaviour
     public playerBullet currentBullet;
 
     private playerLoadout currentSettings;
-    private float coolDown;
+    [SerializeField]
+    public float coolDown;
     [SerializeField]
     private float cooldownTimer;
 
@@ -18,7 +18,7 @@ public class playerShootLogic : MonoBehaviour
         if(currentSettings == null){
             Debug.LogError($"{this.gameObject.tag} DOES NOT HAVE PLAYER LOADOUT");
         }
-        coolDown = currentSettings.coolDown;
+        coolDown = currentSettings.shootCoolDown;
     }
     private void Update()
     {
@@ -35,6 +35,12 @@ public class playerShootLogic : MonoBehaviour
             bouncyBool = !bouncyBool;
             print("Bouncy is " + bouncyBool);
         }
+    }
+    //To be run inside the playerLoadout Script
+    public void updateCoolDown(float newVal)
+    {
+        this.coolDown = newVal;
+        
     }
     private void shootLogic()
     {

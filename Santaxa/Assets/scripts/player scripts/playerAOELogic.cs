@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Net.Sockets;
 using UnityEngine;
 
 // bim bim bam bam
 public class playerAOELogic : MonoBehaviour
 {
     public playerAOEAttack currentAOEAttack;
-    private float coolDown = 1;
+    private float coolDown;
     public float coolDownTimer = 0;
 
     private playerLoadout currentSettings;
@@ -31,7 +28,11 @@ public class playerAOELogic : MonoBehaviour
             gameStateManager.Instance.playerOnAOE(coolDown);
         }
     }
-
+    //use inside player loadout
+    public void updateCoolDown(float newVal)
+    {
+        this.coolDown = newVal;
+    }
     private void createAOEAttack()
     {
         Vector3 mousePositon = Camera.main.ScreenToWorldPoint(Input.mousePosition); // stole your code cuz it applies here :)

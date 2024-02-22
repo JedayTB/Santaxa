@@ -172,6 +172,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthValues: {x: 5, y: 5}
+  deathParticles: {fileID: 8144638451633035578, guid: 7e94b5fcdde5cc444b350846c5a063c0, type: 3}
   speed: 5
   damage: 2
+  isBeingKnocked: 0
   chanceToSpawn: 25

@@ -69,6 +69,6 @@ public class interactableObject : MonoBehaviour
     {
         Debug.Log($"player has interacted with {this.gameObject.name}");
         loadoutUI.SetActive(true);
-        currentPlayerLoadout.handleLoadoutText();
+        currentPlayerLoadout.handleTextAndCoolDown();
     }
 }

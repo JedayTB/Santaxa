@@ -6,7 +6,9 @@ public class hittableObject : MonoBehaviour
     //Is a vector2 to store base hp value.
     //for use in HP Bars.
     protected Vector2 healthValues = new Vector2(1,1);
-
+    
+    [SerializeField]
+    protected ParticleSystem deathParticles;
     
     public virtual void onHit(int hitDamage){
         //Debug.Log($"{this.gameObject.name} was hit for {hitDamage}");
@@ -18,6 +20,16 @@ public class hittableObject : MonoBehaviour
         if(healthValues.y <= 0){
             //Debug.Log($"{this.gameObject.name} has died. Now Destroying.");
             gameStateManager.waveCont.checkIfWaveOver();
+            if(deathParticles != null)
+            {
+                ParticleSystem temp = Instantiate(deathParticles);
+                temp.transform.position = this.transform.position;
+                
+            }
+            else
+            {
+                print($"{this.gameObject.name} does not have particles");
+            }
             Destroy(this.gameObject);
         }
     }
