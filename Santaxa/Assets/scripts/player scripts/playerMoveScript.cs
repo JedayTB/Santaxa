@@ -18,7 +18,7 @@ public class playerMoveScript : MonoBehaviour
     private const float dashCoolDown = 3f;
     [SerializeField]
     private float dashCountDown;
-    private float dashDuration;
+    public float dashDuration;
 
     public enum directionFacing
     {
