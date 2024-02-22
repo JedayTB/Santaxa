@@ -157,7 +157,7 @@ public class playerLoadout : MonoBehaviour
         this.penetetrationTxt.text = $"({this.penetration})";
         this.coolDownTxt.text = $"({this.shootCoolDown})";
         this.AOEDamageTxt.text = $"({this.damageAOE})";
-        this.AOESizeTxt.text = $"({this.sizeAOE})";
+        this.AOESizeTxt.text = $"({this.sizeAOE.x})";
         this.AOECoolDownTxt.text = $"({this.coolDownAOE})";
     }
     private void handleCoolDowns()
