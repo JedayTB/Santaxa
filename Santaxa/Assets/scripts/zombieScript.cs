@@ -54,7 +54,17 @@ public class zombieScript : hittableObject
     {
         if(other.gameObject.tag == "PLAYER"){
             hpEventController playerHPClassRef = other.gameObject.GetComponent<hpEventController>();
-            playerHPClassRef.onHit(this.damage);
+            playerMoveScript moveRef = other.gameObject.GetComponent<playerMoveScript>();
+            playerInvincibility playerRef = other.gameObject.GetComponent<playerInvincibility>();
+            if (playerRef.isInvincible == true || moveRef.dashDuration >= 0)
+            {
+
+            }
+            else if (playerRef.isInvincible == false)
+            {
+                playerHPClassRef.onHit(this.damage);
+                playerRef.enableInvincible();
+            }
         }
     }
 }

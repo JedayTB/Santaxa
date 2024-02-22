@@ -25,6 +25,10 @@ public class waveController : MonoBehaviour
     [SerializeField]
     float generalOffset = 15f;
     float offsetVariation = 5f;
+
+    public GameObject musicController;
+    musicController music;
+
     private int ballssack{  // ayo?????
         get{return ballssack;}
     }
@@ -32,6 +36,7 @@ public class waveController : MonoBehaviour
     void Start()
     {  
         countDownText.gameObject.SetActive(false);
+        music = musicController.GetComponent<musicController>();
     }
     void Update()
     {
@@ -45,6 +50,7 @@ public class waveController : MonoBehaviour
             if(timeCount <= 0){
                 waveSpawnLogic();
                 resetCountDown();
+                music.SwitchToMain();
             }
             countDownText.text = $"Time Until Next Wave\n {timeCount.ToString("##.##")}";
         }
@@ -68,6 +74,7 @@ public class waveController : MonoBehaviour
     void activateCountDown(){
         countDownActivated = true;
         timeCount = countDownStart;
+        music.SwitchToBetween();
     }
     void resetCountDown(){
         countDownActivated = false;
