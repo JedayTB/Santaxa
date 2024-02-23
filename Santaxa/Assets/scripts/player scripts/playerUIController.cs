@@ -67,7 +67,7 @@ public class playerUIController : MonoBehaviour
         //Base value divided by current val
         //(4 / 5) = 0.8 for example
         float newSize = hpValues.y / hpValues.x;
-        print(newSize);
+        //print(newSize);
         Vector3 newScale = targetBar.transform.localScale;
         newScale.y = newSize;
         targetBar.transform.localScale = newScale;

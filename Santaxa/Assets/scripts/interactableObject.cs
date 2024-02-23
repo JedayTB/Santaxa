@@ -7,7 +7,7 @@ public class interactableObject : MonoBehaviour
     //Maybe use in playerloadout with
     //unityevent instead?
     [SerializeField]
-    private GameObject loadoutUI;
+    private Animator loadoutUI;
 
     playerLoadout currentPlayerLoadout;
     bool interactionInterfaceOn = false;
@@ -18,8 +18,6 @@ public class interactableObject : MonoBehaviour
     {
         interactionSprite = GetComponent<SpriteRenderer>();
         interactionSprite.enabled = false;
-
-        loadoutUI.SetActive(false);
 
         GameObject playerReference = gameStateManager.Instance.playerReference;
         currentPlayerLoadout = playerReference.gameObject.GetComponent<playerLoadout>();
@@ -32,7 +30,6 @@ public class interactableObject : MonoBehaviour
             interactionInterfaceOn = true;
         }
         if(interactionInterfaceOn && Input.GetKeyDown(KeyCode.F) && delayForInteraction > delayWait){
-            print("not inisde func yet");
             onPlayerTurnOff();
         }
         if(interactionInterfaceOn){
@@ -53,22 +50,18 @@ public class interactableObject : MonoBehaviour
         {
             interactionSprite.enabled = false;
             //Debug.Log($"{this.name} is within range to be interacted by with player");
-            if(loadoutUI.activeSelf == true){
-                loadoutUI.SetActive(false);
-            }
+            loadoutUI.SetBool("isOpen", false);
         }
     }
     void onPlayerTurnOff(){
         delayForInteraction = 0f;
-        if(loadoutUI.activeSelf == true){
-            loadoutUI.SetActive(false);
-        }
+        loadoutUI.SetBool("isOpen", false);
         interactionInterfaceOn = false;
     }
     void onPlayerInteraction()
     {
         Debug.Log($"player has interacted with {this.gameObject.name}");
-        loadoutUI.SetActive(true);
+        loadoutUI.SetBool("isOpen", true);
         currentPlayerLoadout.handleTextAndCoolDown();
     }
 }

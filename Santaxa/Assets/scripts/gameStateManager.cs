@@ -18,6 +18,7 @@ public class gameStateManager : MonoBehaviour
     public playerShootLogic shootLogic;
     public playerAOELogic aoeLogic;
     public Rigidbody2D playerRB2D;
+    public Animator playerAnimator;
     void Start()
     {
         if(instance != null){
@@ -70,6 +71,11 @@ public class gameStateManager : MonoBehaviour
             Debug.LogError("PLAYER RIGID BODY 2D MISSING");
         }
 
+        playerAnimator = playerReference.GetComponent<Animator>();  
+        if(playerAnimator == null)
+        {
+            Debug.LogError("PLAYER ANIMATOR NULL");
+        }
         waveCont.waveSpawnLogic(); // Start at beggining of game
     }
     public void playerOnDash(float waitTime){

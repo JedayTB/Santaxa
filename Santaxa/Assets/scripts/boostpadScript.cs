@@ -6,18 +6,22 @@ public class boostpadScript : MonoBehaviour
     [SerializeField]
     private Rigidbody2D playerRB;
     [SerializeField]
-    private float boostForce = 25;
+    private float boostForce = 5f;
     [SerializeField]
-    private float boostDuration = 1f;
-    
+    private float boostDuration = 0.5f;
+    [SerializeField]
+    private Animator playerAnimator;
     void Start()
     {
         playerRB = gameStateManager.Instance.playerRB2D;
         if(playerRB == null){
             Debug.LogError($"{this.gameObject.tag} player rb2d null!");
-        }else{
-            Debug.LogWarning("Not configured to get player reference from GSM find a Fix!");
         }
+        playerAnimator = gameStateManager.Instance.playerAnimator;
+        if( playerAnimator == null) {
+            print("bhu");
+        }
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -27,6 +31,8 @@ public class boostpadScript : MonoBehaviour
     }
     void boostPadLogic(){
         StartCoroutine(boostForDuration(boostDuration));
+        playerAnimator.SetBool("isJumping", true);
+        //boostInDirection(this.transform.up, boostForce, playerRB);
     }
     IEnumerator boostForDuration(float duration){
         while(duration >= 0){
@@ -34,10 +40,12 @@ public class boostpadScript : MonoBehaviour
             boostInDirection(this.transform.up,boostForce, playerRB);
             yield return null;
         }
-        playerRB.velocity = Vector2.zero;
+        playerRB.velocity = Vector3.zero;
+        print("end");
         StopCoroutine(boostForDuration(duration));
     }
     void boostInDirection(Vector3 dir, float force,  Rigidbody2D target){
-        target.AddForce(dir * force);
+        //target.AddForce(dir * force);
+        target.velocity = dir * force;
     }
 }
