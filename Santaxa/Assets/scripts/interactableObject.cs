@@ -8,7 +8,7 @@ public class interactableObject : MonoBehaviour
     //unityevent instead?
     [SerializeField]
     private GameObject loadoutUI;
-    //Not optimal either. 
+
     playerLoadout currentPlayerLoadout;
     bool interactionInterfaceOn = false;
     
@@ -21,7 +21,7 @@ public class interactableObject : MonoBehaviour
 
         loadoutUI.SetActive(false);
 
-        GameObject playerReference = gameStateManager.playerReference;
+        GameObject playerReference = gameStateManager.Instance.playerReference;
         currentPlayerLoadout = playerReference.gameObject.GetComponent<playerLoadout>();
     }
     private void Update()

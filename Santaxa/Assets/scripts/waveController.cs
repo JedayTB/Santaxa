@@ -69,7 +69,7 @@ public class waveController : MonoBehaviour
     }
     void updateGearPointReward(){ 
         int gpReward = waveNumber * 2;
-        gameStateManager.playerLoadout.gpAmount += gpReward;
+        gameStateManager.Instance.playerLoadout.gpAmount += gpReward;
     }
     void activateCountDown(){
         countDownActivated = true;
@@ -112,7 +112,7 @@ public class waveController : MonoBehaviour
     private Vector3 getRandomPositionOffscreenOfPlayer(){
         Vector3 newPos = new Vector3();
         int UpDownLeftOrRight = Random.Range(0, 4);
-        Vector3 playerPos = gameStateManager.playerReference.transform.position;
+        Vector3 playerPos = gameStateManager.Instance.playerReference.transform.position;
         switch(UpDownLeftOrRight){
             case 0: //up
                 newPos.y = playerPos.y + generalOffset;

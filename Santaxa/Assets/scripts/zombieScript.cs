@@ -18,7 +18,7 @@ public class zombieScript : hittableObject
     public int chanceToSpawn;
     void Start()
     {
-        playerReference = gameStateManager.playerReference;
+        playerReference = gameStateManager.Instance.playerReference;
         if(playerReference == null)
         {
             Debug.LogError($"{this.gameObject.name} has null player!");
