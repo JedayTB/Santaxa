@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class hpEventController : hittableObject
@@ -16,6 +13,7 @@ public class hpEventController : hittableObject
         base.onHit(hitDamage);
         //print(healthPoints);
         GSM.playerOnHit(this.healthValues);
+        gameStateManager.Instance.plInvincibility.enableInvincible();
     }
     public override void subtractHealth(int healthDelta)
     {

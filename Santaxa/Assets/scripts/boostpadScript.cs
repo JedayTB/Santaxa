@@ -13,15 +13,17 @@ public class boostpadScript : MonoBehaviour
     private Animator playerAnimator;
     void Start()
     {
+        //Debug.LogWarning($"Uncomment below lines inside boostpad script. -Arrazola");
+        
         playerRB = gameStateManager.Instance.playerRB2D;
         if(playerRB == null){
-            Debug.LogError($"{this.gameObject.tag} player rb2d null!");
+            Debug.LogError($"{this.gameObject.name} player rb2d null!");
         }
         playerAnimator = gameStateManager.Instance.playerAnimator;
         if( playerAnimator == null) {
             print("bhu");
         }
-
+        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -41,7 +43,7 @@ public class boostpadScript : MonoBehaviour
             yield return null;
         }
         playerRB.velocity = Vector3.zero;
-        print("end");
+        playerAnimator.SetBool("isJumping", false);
         StopCoroutine(boostForDuration(duration));
     }
     void boostInDirection(Vector3 dir, float force,  Rigidbody2D target){

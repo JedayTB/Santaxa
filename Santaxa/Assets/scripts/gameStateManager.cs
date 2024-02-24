@@ -1,11 +1,10 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class gameStateManager : MonoBehaviour
 {
     public GameObject playerReference;
     [SerializeField]
-    public Text hpText;
+    //public Text hpText;
     public  hpEventController playerHpEvent;
     public playerLoadout playerLoadout;
     private static gameStateManager instance;
@@ -19,8 +18,12 @@ public class gameStateManager : MonoBehaviour
     public playerAOELogic aoeLogic;
     public Rigidbody2D playerRB2D;
     public Animator playerAnimator;
-    void Start()
-    {
+    
+    public playerMoveScript plMoveScript;
+
+    public playerInvincibility plInvincibility ;    
+
+    void Start(){
         if(instance != null){
             Destroy(this.gameObject);
         }else{
@@ -76,6 +79,11 @@ public class gameStateManager : MonoBehaviour
         {
             Debug.LogError("PLAYER ANIMATOR NULL");
         }
+
+        plMoveScript = playerReference.gameObject.GetComponent<playerMoveScript>();
+
+        plInvincibility = playerReference.gameObject.GetComponent<playerInvincibility>();
+        
         waveCont.waveSpawnLogic(); // Start at beggining of game
     }
     public void playerOnDash(float waitTime){

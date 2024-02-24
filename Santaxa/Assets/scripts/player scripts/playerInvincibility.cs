@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -7,42 +6,32 @@ using UnityEngine;
 public class playerInvincibility : MonoBehaviour
 {
     public bool isInvincible = false;
-    private float invincibleTime = 0;
-    private float flickerTimer = 0.15f;
+    private float invincibleTime = 1.5f;
 
     SpriteRenderer sr;
-
-    // Start is called before the first frame update
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        invincibleTime -= Time.deltaTime;
-        flickerTimer -= Time.deltaTime;
-        if (invincibleTime <= 0)
-        {
-            disableInvincible();
-        }
-
-        if (flickerTimer < 0 && isInvincible) 
-        {
-            sr.enabled = !sr.enabled;
-            flickerTimer = 0.15f;
-        }
-    }
-
     public void enableInvincible()
     {
+        print("being run");
         isInvincible = true;
-        invincibleTime = 1.5f;
+        StartCoroutine(flickerPlayer(invincibleTime));
     }
-
-    public void disableInvincible() 
-    {
+    IEnumerator flickerPlayer(float duration){
+        while(duration >= 0){
+            duration -= Time.deltaTime;
+            //print(duration);
+            print(duration % 0.25f);
+            if(duration % 0.25f <= 0.075){
+                print("flip");
+                sr.enabled = !sr.enabled;
+            }
+            yield return null;
+        }
+        sr.enabled = true;
         isInvincible = false;
-    } 
+        StopCoroutine(flickerPlayer(duration));
+    }
 }

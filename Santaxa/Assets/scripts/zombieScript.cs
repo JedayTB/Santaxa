@@ -16,6 +16,9 @@ public class zombieScript : hittableObject
     private float knockTimer = 0.15f; // how long the knock lasts
     
     public int chanceToSpawn;
+  
+    private playerMoveScript moveRef;
+    private playerInvincibility plInvince;
     void Start()
     {
         playerReference = gameStateManager.Instance.playerReference;
@@ -23,7 +26,14 @@ public class zombieScript : hittableObject
         {
             Debug.LogError($"{this.gameObject.name} has null player!");
         }
-        
+        /*
+                    hpEventController playerHPClassRef = other.gameObject.GetComponent<hpEventController>();
+            playerMoveScript moveRef = other.gameObject.GetComponent<playerMoveScript>();
+            playerInvincibility playerRef = other.gameObject.GetComponent<playerInvincibility>();
+        */
+      
+        moveRef = gameStateManager.Instance.plMoveScript;
+        plInvince = gameStateManager.Instance.plInvincibility;
     }
 
     // Update is called once per frame
@@ -53,17 +63,10 @@ public class zombieScript : hittableObject
     void OnCollisionEnter2D(Collision2D other)
     {
         if(other.gameObject.tag == "PLAYER"){
-            hpEventController playerHPClassRef = other.gameObject.GetComponent<hpEventController>();
-            playerMoveScript moveRef = other.gameObject.GetComponent<playerMoveScript>();
-            playerInvincibility playerRef = other.gameObject.GetComponent<playerInvincibility>();
-            if (playerRef.isInvincible == true || moveRef.dashDuration >= 0)
+            if (plInvince.isInvincible == false && moveRef.dashDuration <= 0)
             {
-
-            }
-            else if (playerRef.isInvincible == false)
-            {
-                playerHPClassRef.onHit(this.damage);
-                playerRef.enableInvincible();
+                gameStateManager.Instance.playerHpEvent.onHit(this.damage);
+                //plInvince.enableInvincible();
             }
         }
     }
