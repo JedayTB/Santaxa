@@ -9,6 +9,8 @@ TagManager:
   - loadoutUI
   - cover
   - enemy
+  - dashRadius
+  - dashEnemy
   layers:
   - Default
   - TransparentFX

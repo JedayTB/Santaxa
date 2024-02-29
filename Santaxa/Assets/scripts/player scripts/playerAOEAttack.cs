@@ -46,7 +46,7 @@ public class playerAOEAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("enemy"))
+        if (collision.CompareTag("enemy") || collision.CompareTag("dashEnemy"))
         {
             hittableObject hitThis = collision.GetComponent<hittableObject>();
             zombieScript zombie = collision.GetComponent<zombieScript>(); // i love getting component (there has to be a better way to do this)

@@ -88,4 +88,12 @@ public class playerMoveScript : MonoBehaviour
                 break;
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("dashEnemy"))
+        {
+            rb.velocity = Vector3.zero;
+        }
+    }
 }
