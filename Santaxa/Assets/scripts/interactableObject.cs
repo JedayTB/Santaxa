@@ -9,6 +9,7 @@ public class interactableObject : MonoBehaviour
     [SerializeField]
     private Animator loadoutUI;
 
+    [SerializeField]
     playerLoadout currentPlayerLoadout;
     bool interactionInterfaceOn = false;
     
@@ -19,8 +20,7 @@ public class interactableObject : MonoBehaviour
         interactionSprite = GetComponent<SpriteRenderer>();
         interactionSprite.enabled = false;
 
-        GameObject playerReference = gameStateManager.Instance.playerReference;
-        currentPlayerLoadout = playerReference.gameObject.GetComponent<playerLoadout>();
+        currentPlayerLoadout = gameStateManager.Instance.playerLoadout;
     }
     private void Update()
     {
@@ -60,7 +60,7 @@ public class interactableObject : MonoBehaviour
     }
     void onPlayerInteraction()
     {
-        Debug.Log($"player has interacted with {this.gameObject.name}");
+        //Debug.Log($"player has interacted with {this.gameObject.name}");
         loadoutUI.SetBool("isOpen", true);
         currentPlayerLoadout.handleTextAndCoolDown();
     }

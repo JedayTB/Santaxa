@@ -15,19 +15,18 @@ public class playerInvincibility : MonoBehaviour
     }
     public void enableInvincible()
     {
-        print("being run");
+        //print("being run");
         isInvincible = true;
         StartCoroutine(flickerPlayer(invincibleTime));
     }
     IEnumerator flickerPlayer(float duration){
         while(duration >= 0){
             duration -= Time.deltaTime;
-            //print(duration);
-            print(duration % 0.25f);
+
             if(duration % 0.25f <= 0.075){
-                print("flip");
                 sr.enabled = !sr.enabled;
             }
+
             yield return null;
         }
         sr.enabled = true;

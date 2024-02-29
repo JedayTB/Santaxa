@@ -85,6 +85,7 @@ public class playerBullet : MonoBehaviour
                 hitThis.onHit(this.damage);
                 penetrationCount -= 1;
             }else{
+                //Peak game design student code right here
                 if(other.gameObject.CompareTag("cover")){
                     if (bounceActive) // love a good triple nested if (ik it could be simplier but honestly this is funny)
                     {

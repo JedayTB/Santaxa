@@ -12,9 +12,7 @@ public class boostpadScript : MonoBehaviour
     [SerializeField]
     private Animator playerAnimator;
     void Start()
-    {
-        //Debug.LogWarning($"Uncomment below lines inside boostpad script. -Arrazola");
-        
+    {        
         playerRB = gameStateManager.Instance.playerRB2D;
         if(playerRB == null){
             Debug.LogError($"{this.gameObject.name} player rb2d null!");
@@ -34,7 +32,6 @@ public class boostpadScript : MonoBehaviour
     void boostPadLogic(){
         StartCoroutine(boostForDuration(boostDuration));
         playerAnimator.SetBool("isJumping", true);
-        //boostInDirection(this.transform.up, boostForce, playerRB);
     }
     IEnumerator boostForDuration(float duration){
         while(duration >= 0){
@@ -47,7 +44,6 @@ public class boostpadScript : MonoBehaviour
         StopCoroutine(boostForDuration(duration));
     }
     void boostInDirection(Vector3 dir, float force,  Rigidbody2D target){
-        //target.AddForce(dir * force);
         target.velocity = dir * force;
     }
 }

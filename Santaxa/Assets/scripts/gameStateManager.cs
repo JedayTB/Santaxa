@@ -4,14 +4,14 @@ public class gameStateManager : MonoBehaviour
 {
     public GameObject playerReference;
     [SerializeField]
-    //public Text hpText;
-    public  hpEventController playerHpEvent;
-    public playerLoadout playerLoadout;
     private static gameStateManager instance;
     public playerUIController playerUICont;
     public static gameStateManager Instance{
         get{return instance;}
     }
+    //public Text hpText;
+    public  hpEventController playerHpEvent;
+    public playerLoadout playerLoadout;
     [SerializeField]
     public static waveController waveCont;
     public playerShootLogic shootLogic;
@@ -41,7 +41,7 @@ public class gameStateManager : MonoBehaviour
         if(waveCont == null){
             Debug.LogError("GameStatemanager wavecontroller null");
         } 
-
+        
         playerLoadout = playerReference.gameObject.GetComponent<playerLoadout>();
         if(playerLoadout == null){
             Debug.LogError("PLAYER LOADOUIT NULL IN GSM");
