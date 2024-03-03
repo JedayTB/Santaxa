@@ -48,6 +48,7 @@ public class playerAOEAttack : MonoBehaviour
     {
         if (collision.CompareTag("enemy") || collision.CompareTag("dashEnemy"))
         {
+            print($"hit {collision.gameObject.name}");
             hittableObject hitThis = collision.GetComponent<hittableObject>();
             zombieScript zombie = collision.GetComponent<zombieScript>(); // i love getting component (there has to be a better way to do this)
             hitThis.onHit(damage);

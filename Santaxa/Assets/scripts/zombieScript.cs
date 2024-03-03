@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class zombieScript : hittableObject
@@ -23,6 +20,8 @@ public class zombieScript : hittableObject
   
     private playerMoveScript moveRef;
     private playerInvincibility plInvince;
+
+    private Animator enemyAnimator;
     void Start()
     {
         playerReference = gameStateManager.Instance.playerReference;
@@ -31,11 +30,15 @@ public class zombieScript : hittableObject
             Debug.LogError($"{this.gameObject.name} has null player!");
         }
         /*
-                    hpEventController playerHPClassRef = other.gameObject.GetComponent<hpEventController>();
+            hpEventController playerHPClassRef = other.gameObject.GetComponent<hpEventController>();
             playerMoveScript moveRef = other.gameObject.GetComponent<playerMoveScript>();
             playerInvincibility playerRef = other.gameObject.GetComponent<playerInvincibility>();
         */
-      
+        enemyAnimator = gameObject.GetComponent<Animator>();
+        if(enemyAnimator == null){
+            Debug.LogError($"{this.gameObject.name} Null Animator! or doesn't have one.");
+        }
+
         moveRef = gameStateManager.Instance.plMoveScript;
         plInvince = gameStateManager.Instance.plInvincibility;
     }
@@ -70,7 +73,8 @@ public class zombieScript : hittableObject
             CheckForWall();
             wallCheckTimer = 0.1f;
         }
-
+        bool movingCheck = moveDir.x > 0.1f && moveDir.y > 0.1f;
+        enemyAnimator.SetBool("isMoving", movingCheck);
     }
 
     // Does a raycast in the direction of the player

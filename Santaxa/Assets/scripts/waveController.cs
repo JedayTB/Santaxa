@@ -98,8 +98,9 @@ public class waveController : MonoBehaviour
         int probability;
         bool repeatUntilMakeEnemy = true;
         while(repeatUntilMakeEnemy){
-            rndNum = Random.Range(0, enemyPrefrabs.Count);
-            probability = Random.Range(0, 101);
+            rndNum = Random.Range(0, enemyPrefrabs.Count); //rnd prefrab
+            probability = Random.Range(0, 101); //rnd probability chance
+            // 0 < 50? make enemy
             if(probability < enemyPrefrabs[rndNum].chanceToSpawn){
                 zombieScript temp = Instantiate(enemyPrefrabs[rndNum]);
                 temp.transform.position = getRandomPositionOffscreenOfPlayer();
