@@ -10,6 +10,10 @@ public class hittableObject : MonoBehaviour
     [SerializeField]
     protected ParticleSystem deathParticles;
     
+    [SerializeField]
+    protected AudioSource src;
+    [SerializeField]
+    protected AudioClip[] hitFX;
     public virtual void onHit(int hitDamage){
         //Debug.Log($"{this.gameObject.name} was hit for {hitDamage}");
         subtractHealth(hitDamage);
