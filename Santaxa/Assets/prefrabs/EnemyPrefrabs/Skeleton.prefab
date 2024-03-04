@@ -123,6 +123,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthValues: {x: 2, y: 2}
   deathParticles: {fileID: 5306459841707147172, guid: 03bf155e124982b499ba02baf8dab84b, type: 3}
+  audioSRC: {fileID: 0}
+  hitFX:
+  - {fileID: 8300000, guid: 193199f7ac6efca4db61c1500978c15f, type: 3}
+  - {fileID: 8300000, guid: b1c7a1dd88c228c4f8d3d1ba83c8ed0d, type: 3}
+  - {fileID: 8300000, guid: bcb7c41db0b7cc64993acdb8b8c4436d, type: 3}
+  - {fileID: 8300000, guid: c592d5d3b689a1940a08468ac556ac02, type: 3}
+  - {fileID: 8300000, guid: 73c91c49a61638d45984e3f0ca01a5b8, type: 3}
   speed: 5
   moveDir: {x: 0, y: 0}
   damage: 1

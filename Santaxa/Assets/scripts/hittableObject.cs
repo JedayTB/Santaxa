@@ -11,16 +11,24 @@ public class hittableObject : MonoBehaviour
     protected ParticleSystem deathParticles;
     
     [SerializeField]
-    protected AudioSource src;
+    protected AudioSource audioSRC;
     [SerializeField]
     protected AudioClip[] hitFX;
+    void Start()
+    {
+        audioSRC = AudioSource.FindAnyObjectByType<AudioSource>();
+        if(audioSRC == null){
+            Debug.LogError("AUDIO SOURCE NULL");
+        }
+    }
     public virtual void onHit(int hitDamage){
         //Debug.Log($"{this.gameObject.name} was hit for {hitDamage}");
         subtractHealth(hitDamage);
     }   
      public virtual void subtractHealth(int healthDelta){
         this.healthValues.y -= healthDelta;
-        
+        //playRndHitSfx();
+        Debug.LogWarning($"should play {this.gameObject.name} hit sfx here");
         if(healthValues.y <= 0){
             //Debug.Log($"{this.gameObject.name} has died. Now Destroying.");
             gameStateManager.waveCont.checkIfWaveOver();
@@ -36,5 +44,10 @@ public class hittableObject : MonoBehaviour
             }
             Destroy(this.gameObject);
         }
+    }
+    protected virtual void playRndHitSfx(){
+        int rndNum = Random.Range(0, hitFX.Length);
+        audioSRC.clip = hitFX[rndNum];
+        audioSRC.Play();
     }
 }
