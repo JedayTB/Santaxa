@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class zombieScript : hittableObject
 {
+    public static int numOfEnemies = 0;
    private GameObject playerReference;
     [SerializeField] private float speed = 5f;
     private Vector2 playerPos;
@@ -22,8 +23,14 @@ public class zombieScript : hittableObject
     private playerInvincibility plInvince;
 
     private Animator enemyAnimator;
+    [Tooltip("This is the identifier of the enemy")]
+    [SerializeField]
+    private int enemyNumber = 0;
     void Start()
     {
+        enemyNumber = numOfEnemies;
+        numOfEnemies++;
+
         playerReference = gameStateManager.Instance.playerReference;
         if(playerReference == null)
         {
@@ -110,5 +117,10 @@ public class zombieScript : hittableObject
                 //plInvince.enableInvincible();
             }
         }
+    }
+    protected override void OnDestroy()
+    {
+        gameStateManager.waveCont.enemyArray.Remove(this);
+        base.OnDestroy();
     }
 }

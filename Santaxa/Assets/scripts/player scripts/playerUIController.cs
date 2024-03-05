@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 //Doesn't really need to be a "player" script.
@@ -10,13 +11,40 @@ public class playerUIController : MonoBehaviour
     private scaleableBar dashCoolDownBar;
     [SerializeField]
     private scaleableBar AOECoolDownBar;
+    [SerializeField]
+    private scaleableBar lastEnemyArrow;
     void Start()
     {
-        //Only show in 
-
         HpBar.gameObject.SetActive(false);
         dashCoolDownBar.gameObject.SetActive(false);
         AOECoolDownBar.gameObject.SetActive(false);
+        lastEnemyArrow.gameObject.SetActive(false);
+    }
+    void Update()
+    {
+        if(gameStateManager.waveCont.enemiesAliveThisWave == 1){
+            lastEnemyArrow.gameObject.SetActive(true);
+
+        }
+    }
+    void rotateTowardsLastEnemy(scaleableBar targetBar){
+         Vector3 mousePositon = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 currentPosition = this.transform.position;
+
+        mousePositon.z = 0f;
+        currentPosition.z = 0f;
+
+        Vector3 delta = mousePositon - currentPosition;
+
+        float valueToRoate = Mathf.Atan2(delta.y , delta.x);
+        
+        Quaternion rotationForBullet = Quaternion.Euler(0, 0, Mathf.Rad2Deg * valueToRoate - 90f);
+
+        //print($"bullet quaternion {rotationForBullet}\n rotate val {valueToRoate}");
+        //playerBullet temp = Instantiate(currentBullet);
+
+        //temp.transform.SetPositionAndRotation(currentPosition, rotationForBullet);
+        //temp.setBulletAttritbutes(currentSettings);
     }
     //sprite.color = new Color (1, 0, 0, 1); 
     IEnumerator fadeOut(scaleableBar sprite, float countDown)

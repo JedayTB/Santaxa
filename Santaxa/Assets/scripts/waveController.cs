@@ -5,12 +5,13 @@ using UnityEngine.UI;
 public class waveController : MonoBehaviour
 {
     [SerializeField]
+    public LinkedList<zombieScript> enemyArray;
+    [SerializeField]
     private List<zombieScript> enemyPrefrabs;
    
     [SerializeField]
     private int waveNumber = 1;
 
-    //the static 
     public int enemiesAliveThisWave;
     [SerializeField]
     private bool countDownActivated = false;
@@ -26,7 +27,9 @@ public class waveController : MonoBehaviour
 
     public GameObject musicController;
     musicController music;
-
+    //was doing this to show c# getter setter method
+    //If actually called, will make a stack overload...
+    //lol
     private int ballssack{  // ayo?????
         get{return ballssack;}
     }
@@ -104,6 +107,8 @@ public class waveController : MonoBehaviour
             if(probability < enemyPrefrabs[rndNum].chanceToSpawn){
                 zombieScript temp = Instantiate(enemyPrefrabs[rndNum]);
                 temp.transform.position = getRandomPositionOffscreenOfPlayer();
+                //breaks spawning for some reason?
+                //enemyArray.AddLast(temp);
                 repeatUntilMakeEnemy = false;
             }
         }

@@ -42,8 +42,12 @@ public class hittableObject : MonoBehaviour
             {
                 print($"{this.gameObject.name} does not have particles");
             }
-            Destroy(this.gameObject);
+            OnDestroy();
         }
+    }
+    protected virtual void OnDestroy()
+    {
+        Destroy(this.gameObject);
     }
     protected virtual void playRndHitSfx(){
         int rndNum = Random.Range(0, hitFX.Length);
