@@ -17,17 +17,12 @@ public class playerMoveScript : MonoBehaviour
     private float dashCountDown;
     public float dashDuration;
 
-    public enum directionFacing
-    {
-        left = 0,
-        right = 1,
-        up = 2,
-        down = 3
-    }
+    private SpriteRenderer ownSprite;
     // Update is called once per frame
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        ownSprite = GetComponent<SpriteRenderer>();
         dashCountDown = dashCoolDown; //to dash right away
     }
     void Update()
@@ -55,7 +50,7 @@ public class playerMoveScript : MonoBehaviour
             doDash(dashChangeForce, moveDirection.normalized);
             gameStateManager.Instance.playerOnDash(dashCoolDown);
         }
-
+        flipSprite();
         moveDirection *= speed * Time.deltaTime;
         transform.Translate(moveDirection);
     }
@@ -65,27 +60,15 @@ public class playerMoveScript : MonoBehaviour
         dashCountDown = 0;
         dashDuration = 2f;
     }
-    private void flip(int dir)
+    void flipSprite()
     {
-        
-        Vector3 currentScale = transform.localScale; //Getting the current scale transform
-       
-        switch (dir){
-            case (int)directionFacing.left:
-
-                break;
-            case (int)directionFacing.right:
-                
-                break;
-            case (int)directionFacing.up:
-                
-                break;
-            case (int)directionFacing.down:
-                
-                break;
-            default:
-                Debug.Log("Not a direction");
-                break;
+        if (horizontalInput > 0) // right
+        {
+            ownSprite.flipX = false;
+        }
+        else if (horizontalInput < 0) // left
+        {
+            ownSprite.flipX = true;
         }
     }
 

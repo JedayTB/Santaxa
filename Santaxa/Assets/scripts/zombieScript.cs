@@ -26,6 +26,8 @@ public class zombieScript : hittableObject
     [Tooltip("This is the identifier of the enemy")]
     [SerializeField]
     private int enemyNumber = 0;
+
+    private SpriteRenderer ownSprite;
     void Start()
     {
         enemyNumber = numOfEnemies;
@@ -41,6 +43,8 @@ public class zombieScript : hittableObject
             playerMoveScript moveRef = other.gameObject.GetComponent<playerMoveScript>();
             playerInvincibility playerRef = other.gameObject.GetComponent<playerInvincibility>();
         */
+        ownSprite = gameObject.GetComponent<SpriteRenderer>();  
+
         enemyAnimator = gameObject.GetComponent<Animator>();
         if(enemyAnimator == null){
             Debug.LogError($"{this.gameObject.name} Null Animator! or doesn't have one.");
@@ -80,6 +84,7 @@ public class zombieScript : hittableObject
             CheckForWall();
             wallCheckTimer = 0.1f;
         }
+        flipSprite();
         bool movingCheck = moveDir.x > 0.1f && moveDir.y > 0.1f;
         enemyAnimator.SetBool("isMoving", movingCheck);
     }
@@ -107,7 +112,16 @@ public class zombieScript : hittableObject
             isTurned = false;
         }
     }
-
+    void flipSprite()
+    {
+        if(moveDir.x > 0) // right
+        {
+            ownSprite.flipX = false;
+        }else if(moveDir.x < 0) // left
+        {
+            ownSprite.flipX = true;
+        }
+    }
     void OnCollisionEnter2D(Collision2D other)
     {
         if(other.gameObject.tag == "PLAYER"){
