@@ -108,10 +108,11 @@ MonoBehaviour:
   moveDir: {x: 0, y: 0}
   damage: 10
   isBeingKnocked: 0
+  isTurned: 0
   coverLayer:
     serializedVersion: 2
     m_Bits: 8
-  chanceToSpawn: 15
+  chanceToSpawn: 7
   enemyNumber: 0
 --- !u!50 &8787666389178645741
 Rigidbody2D:
