@@ -23,7 +23,8 @@ public class playerShootLogic : MonoBehaviour
     private void Update()
     {
         cooldownTimer += Time.deltaTime;
-        if (Input.GetButtonDown("Fire1") && cooldownTimer >= coolDown)
+        
+        if (Input.GetButton("Fire1") && cooldownTimer >= coolDown)
         {
             shootLogic();
             //ineficient. find event way to do.
