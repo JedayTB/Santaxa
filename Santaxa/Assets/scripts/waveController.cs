@@ -1,11 +1,13 @@
+using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class waveController : MonoBehaviour
 {
     [SerializeField]
-    public LinkedList<zombieScript> enemyArray;
+    public List<zombieScript> enemyArray;
     [SerializeField]
     private List<zombieScript> enemyPrefrabs;
    
@@ -65,6 +67,8 @@ public class waveController : MonoBehaviour
             //print("THIS RUNS! HEY HEY JKOELS CAN'T FREESTYLE FOR TSHIT");
             activateCountDown();
             updateGearPointReward();
+
+            gameStateManager.Instance.playerUICont.fadeOutArrow();
             waveNumber++;
         }
     }
@@ -108,7 +112,7 @@ public class waveController : MonoBehaviour
                 zombieScript temp = Instantiate(enemyPrefrabs[rndNum]);
                 temp.transform.position = getRandomPositionOffscreenOfPlayer();
                 //breaks spawning for some reason?
-                //enemyArray.AddLast(temp);
+                enemyArray.Add(temp);   
                 repeatUntilMakeEnemy = false;
             }
         }

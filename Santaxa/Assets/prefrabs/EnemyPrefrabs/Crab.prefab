@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6864804714042592866}
   m_Layer: 0
   m_Name: Crab
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,6 +133,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   chanceToSpawn: 40
+  enemyNumber: 0
 --- !u!61 &7328950782704698444
 BoxCollider2D:
   m_ObjectHideFlags: 0

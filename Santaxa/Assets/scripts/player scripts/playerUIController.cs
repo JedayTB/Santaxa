@@ -13,6 +13,9 @@ public class playerUIController : MonoBehaviour
     private scaleableBar AOECoolDownBar;
     [SerializeField]
     private scaleableBar lastEnemyArrow;
+
+    private Vector3 lastEnemyPos;
+    private Vector3 arrowPivotPoint;
     void Start()
     {
         HpBar.gameObject.SetActive(false);
@@ -24,27 +27,23 @@ public class playerUIController : MonoBehaviour
     {
         if(gameStateManager.waveCont.enemiesAliveThisWave == 1){
             lastEnemyArrow.gameObject.SetActive(true);
-
+            rotateTowardsLastEnemy(lastEnemyArrow);
         }
     }
     void rotateTowardsLastEnemy(scaleableBar targetBar){
-         Vector3 mousePositon = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 currentPosition = this.transform.position;
+        lastEnemyPos = gameStateManager.waveCont.enemyArray[0].transform.position;
+        arrowPivotPoint = gameStateManager.Instance.playerReference.transform.position;
 
-        mousePositon.z = 0f;
-        currentPosition.z = 0f;
 
-        Vector3 delta = mousePositon - currentPosition;
+        arrowPivotPoint.z = 0f;
+
+        Vector3 delta = lastEnemyPos - arrowPivotPoint;
 
         float valueToRoate = Mathf.Atan2(delta.y , delta.x);
         
-        Quaternion rotationForBullet = Quaternion.Euler(0, 0, Mathf.Rad2Deg * valueToRoate - 90f);
+        Quaternion rotationForArrow = Quaternion.Euler(0, 0, Mathf.Rad2Deg * valueToRoate - 90f);
 
-        //print($"bullet quaternion {rotationForBullet}\n rotate val {valueToRoate}");
-        //playerBullet temp = Instantiate(currentBullet);
-
-        //temp.transform.SetPositionAndRotation(currentPosition, rotationForBullet);
-        //temp.setBulletAttritbutes(currentSettings);
+        targetBar.transform.rotation = rotationForArrow;
     }
     //sprite.color = new Color (1, 0, 0, 1); 
     IEnumerator fadeOut(scaleableBar sprite, float countDown)
@@ -59,7 +58,6 @@ public class playerUIController : MonoBehaviour
             sprite.barSpriteRenderer.color = opacity;
             yield return null;
         }
-        
         sprite.gameObject.SetActive(false);
         StopCoroutine(fadeOut(sprite, countDown));
     }
@@ -109,7 +107,13 @@ public class playerUIController : MonoBehaviour
         //print("cghec for change");
         hpBarLogic(HpBar, hpValues);
     }
-
+    public void fadeOutArrow()
+    {
+        print("being run!");
+        
+        fadeOut(lastEnemyArrow, 1f);
+        lastEnemyArrow.gameObject.SetActive(false);
+    }
     public void AOECoolDown(float coolDownTime)
     {
         StartCoroutine(CoolDownBar(AOECoolDownBar.transform, coolDownTime));
