@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -2050608094615468086}
   m_Layer: 0
   m_Name: politician
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,10 +108,12 @@ MonoBehaviour:
   moveDir: {x: 0, y: 0}
   damage: 10
   isBeingKnocked: 0
+  isTurned: 0
   coverLayer:
     serializedVersion: 2
     m_Bits: 8
-  chanceToSpawn: 15
+  chanceToSpawn: 7
+  enemyNumber: 0
 --- !u!50 &8787666389178645741
 Rigidbody2D:
   serializedVersion: 4
