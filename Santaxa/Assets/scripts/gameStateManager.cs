@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class gameStateManager : MonoBehaviour
 {
@@ -36,11 +37,6 @@ public class gameStateManager : MonoBehaviour
         }else{
             Debug.Log("gamestate manager got player");
         }
-
-        waveCont = GameObject.FindWithTag("waveManager").GetComponent<waveController>();
-        if(waveCont == null){
-            Debug.LogError("GameStatemanager wavecontroller null");
-        } 
         
         playerLoadout = playerReference.gameObject.GetComponent<playerLoadout>();
         if(playerLoadout == null){
@@ -84,7 +80,15 @@ public class gameStateManager : MonoBehaviour
 
         plInvincibility = playerReference.gameObject.GetComponent<playerInvincibility>();
         
-        waveCont.waveSpawnLogic(); // Start at beggining of game
+        //Just for controls screen to not get errors
+        if(SceneManager.GetActiveScene().name == "game"){
+            print("is game");
+            waveCont = GameObject.FindWithTag("waveManager").GetComponent<waveController>();
+                if(waveCont == null){
+                    Debug.LogError("GameStatemanager wavecontroller null");
+                } 
+            waveCont.waveSpawnLogic(); // Start at beggining of game
+        }
     }
     public void playerOnDash(float waitTime){
         playerUICont.dashCoolDown(waitTime);

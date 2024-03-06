@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 //Doesn't really need to be a "player" script.
 //All methods are generic used. Except the two public ones
 public class playerUIController : MonoBehaviour
@@ -22,13 +23,15 @@ public class playerUIController : MonoBehaviour
     }
     void Update()
     {
-        if(gameStateManager.waveCont.enemiesAliveThisWave == 1){
+        if(SceneManager.GetActiveScene().name == "game"){
+            if(gameStateManager.waveCont.enemiesAliveThisWave == 1){
             lastEnemyArrow.gameObject.SetActive(true);
-
+            }
         }
+        
     }
     void rotateTowardsLastEnemy(scaleableBar targetBar){
-         Vector3 mousePositon = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mousePositon = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 currentPosition = this.transform.position;
 
         mousePositon.z = 0f;
