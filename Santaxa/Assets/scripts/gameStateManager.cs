@@ -1,4 +1,5 @@
 using UnityEngine;
+
 using UnityEngine.SceneManagement;
 
 public class gameStateManager : MonoBehaviour
@@ -22,8 +23,9 @@ public class gameStateManager : MonoBehaviour
     
     public playerMoveScript plMoveScript;
 
-    public playerInvincibility plInvincibility;    
+    public playerInvincibility plInvincibility ;
 
+    public SFXController sfx;
     void Start(){
         if(instance != null){
             Destroy(this.gameObject);
@@ -79,6 +81,8 @@ public class gameStateManager : MonoBehaviour
         plMoveScript = playerReference.gameObject.GetComponent<playerMoveScript>();
 
         plInvincibility = playerReference.gameObject.GetComponent<playerInvincibility>();
+
+        sfx = playerReference.gameObject.GetComponent<SFXController>();
         
         //Just for controls screen to not get errors
         if(SceneManager.GetActiveScene().name == "game"){

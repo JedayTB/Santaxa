@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -1414173015946165487}
   m_Layer: 0
   m_Name: AOEAttackRect
-  m_TagString: Untagged
+  m_TagString: bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,8 +101,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 3
-  objectLifeTime: 0.5
-  color: {r: 1, g: 0, b: 0, a: 1}
 --- !u!61 &-1414173015946165487
 BoxCollider2D:
   m_ObjectHideFlags: 0

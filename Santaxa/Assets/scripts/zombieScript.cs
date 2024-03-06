@@ -33,6 +33,7 @@ public class zombieScript : hittableObject
     private int enemyNumber = 0;
 
     private SpriteRenderer ownSprite;
+
     void Start()
     {
         enemyNumber = numOfEnemies;
