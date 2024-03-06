@@ -21,8 +21,9 @@ public class gameStateManager : MonoBehaviour
     
     public playerMoveScript plMoveScript;
 
-    public playerInvincibility plInvincibility ;    
+    public playerInvincibility plInvincibility ;
 
+    public SFXController sfx;
     void Start(){
         if(instance != null){
             Destroy(this.gameObject);
@@ -83,6 +84,8 @@ public class gameStateManager : MonoBehaviour
         plMoveScript = playerReference.gameObject.GetComponent<playerMoveScript>();
 
         plInvincibility = playerReference.gameObject.GetComponent<playerInvincibility>();
+
+        sfx = playerReference.gameObject.GetComponent<SFXController>();
         
         waveCont.waveSpawnLogic(); // Start at beggining of game
     }

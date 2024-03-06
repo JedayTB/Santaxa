@@ -6,13 +6,14 @@ public class hpEventController : hittableObject
     private gameStateManager GSM;
     void Start()
     {
-        GSM = gameStateManager.Instance;
+        GSM = gameStateManager.Instance; 
     }
     public override void onHit(int hitDamage)
     {
         base.onHit(hitDamage);
         //print(healthPoints);
         GSM.playerOnHit(this.healthValues);
+        GSM.sfx.playerHitSFX();
         gameStateManager.Instance.plInvincibility.enableInvincible();
     }
     public override void subtractHealth(int healthDelta)

@@ -11,6 +11,7 @@ TagManager:
   - enemy
   - dashRadius
   - dashEnemy
+  - bullet
   layers:
   - Default
   - TransparentFX
