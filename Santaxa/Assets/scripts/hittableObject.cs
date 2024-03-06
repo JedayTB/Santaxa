@@ -30,7 +30,6 @@ public class hittableObject : MonoBehaviour
         //playRndHitSfx();
         Debug.LogWarning($"should play {this.gameObject.name} hit sfx here");
         if(healthValues.y <= 0){
-            print("why am i being run");
             gameStateManager.waveCont.checkIfWaveOver();
             if(deathParticles != null)
             {

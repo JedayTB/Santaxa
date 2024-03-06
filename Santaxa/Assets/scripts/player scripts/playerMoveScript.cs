@@ -18,6 +18,8 @@ public class playerMoveScript : MonoBehaviour
     public float dashDuration;
 
     private SpriteRenderer ownSprite;
+    
+    private Vector2 moveDirection;
     // Update is called once per frame
     void Start()
     {
@@ -43,7 +45,7 @@ public class playerMoveScript : MonoBehaviour
             speed = 10f;
         }
 
-        Vector2 moveDirection = new Vector2(horizontalInput, verticalInput);
+        moveDirection = new Vector2(horizontalInput, verticalInput);
 
         if (Input.GetKeyDown(KeyCode.Space) && dashCountDown >= dashCoolDown)
         {
@@ -52,8 +54,10 @@ public class playerMoveScript : MonoBehaviour
         }
         flipSprite();
         moveDirection *= speed * Time.deltaTime;
+        
         transform.Translate(moveDirection);
     }
+    
     void doDash(float force, Vector2 dir){
         speed = 25f;
         rb.AddForce(dir * force); // Got rid of the AddForce2D.Impuse as it allowed you do simply teleport through collision lol

@@ -22,7 +22,7 @@ public class gameStateManager : MonoBehaviour
     
     public playerMoveScript plMoveScript;
 
-    public playerInvincibility plInvincibility ;    
+    public playerInvincibility plInvincibility;    
 
     void Start(){
         if(instance != null){

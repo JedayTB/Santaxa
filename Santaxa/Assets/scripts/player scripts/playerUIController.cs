@@ -31,7 +31,8 @@ public class playerUIController : MonoBehaviour
             lastEnemyArrow.gameObject.SetActive(true);
             rotateTowardsLastEnemy(lastEnemyArrow);
         }
-        
+    
+    }
     }
     void rotateTowardsLastEnemy(scaleableBar targetBar){
         lastEnemyPos = gameStateManager.waveCont.enemyArray[0].transform.position;
@@ -121,4 +122,6 @@ public class playerUIController : MonoBehaviour
     {
         StartCoroutine(CoolDownBar(AOECoolDownBar.transform, coolDownTime));
     }
+    
 }
+
