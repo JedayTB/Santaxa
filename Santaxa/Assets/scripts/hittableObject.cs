@@ -35,4 +35,7 @@ public class hittableObject : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
+    public int getWorkingHealth(){
+        return (int) this.healthValues.y;
+    }
 }

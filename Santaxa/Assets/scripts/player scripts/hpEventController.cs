@@ -8,6 +8,7 @@ public class hpEventController : hittableObject
     {
         GSM = gameStateManager.Instance; 
     }
+    
     public override void onHit(int hitDamage)
     {
         base.onHit(hitDamage);

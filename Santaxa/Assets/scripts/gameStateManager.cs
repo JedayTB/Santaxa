@@ -1,9 +1,13 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class gameStateManager : MonoBehaviour
 {
+    [SerializeField]
+    private Text hpText;
     public GameObject playerReference;
     [SerializeField]
     private static gameStateManager instance;
@@ -99,7 +103,7 @@ public class gameStateManager : MonoBehaviour
     }
     public void playerOnHit(Vector2 hpValues){
         playerUICont.hpUIEvent(hpValues);
-        //print("player hit");
+        hpText.text = $"HP: {playerHpEvent.getWorkingHealth()}";
     }
     public void playerOnAOE(float waitTime)
     {
