@@ -89,6 +89,7 @@ public class playerBullet : MonoBehaviour
                 if(other.gameObject.CompareTag("cover")){
                     if (bounceActive) // love a good triple nested if (ik it could be simplier but honestly this is funny)
                     {
+                        print("bounce!");
                         flipDirection();
                     }
                     else

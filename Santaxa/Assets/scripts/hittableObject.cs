@@ -18,13 +18,12 @@ public class hittableObject : MonoBehaviour
         this.healthValues.y -= healthDelta;
         Debug.LogWarning($"should play {this.gameObject.name} hit sfx here");
         if(healthValues.y <= 0){
-            //Debug.Log($"{this.gameObject.name} has died. Now Destroying.");
+            print("why am i being run");
             gameStateManager.waveCont.checkIfWaveOver();
             if(deathParticles != null)
             {
                 ParticleSystem temp = Instantiate(deathParticles);
                 temp.transform.position = this.transform.position;
-                
             }
             else
             {
