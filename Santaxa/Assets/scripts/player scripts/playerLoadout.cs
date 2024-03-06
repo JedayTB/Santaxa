@@ -9,7 +9,8 @@ public class playerLoadout : MonoBehaviour
     public float shootCoolDown = 0.3f;
 
     public int damageAOE = 3;
-    public Vector2 sizeAOE = new Vector2(6.6f, 3.6f); // goofy ahh starting numbers
+    //magic numbers, my favourite
+    public Vector2 sizeAOE = new Vector2(3f, 2.5f); // goofy ahh starting numbers
     public float coolDownAOE = 7f;
 
     private int gearPointsAmount = 5;

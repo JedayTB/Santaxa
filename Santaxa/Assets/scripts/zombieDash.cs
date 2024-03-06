@@ -7,7 +7,6 @@ public class zombieDash : MonoBehaviour
 {
     Rigidbody2D rb;
     zombieScript zombie;
-    private Vector2 direction;
 
     private float dashDuration;
 
@@ -32,9 +31,8 @@ public class zombieDash : MonoBehaviour
 
     private void doDash() // the enemy dash is very similar to the player dash
     {
-        direction = zombie.moveDir;
         //speed = 25f;
-        rb.AddForce(direction * 500f);
+        rb.AddForce(zombie.moveDir * 500f);
         dashDuration = 2f;
     }
 

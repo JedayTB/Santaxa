@@ -8,11 +8,13 @@ public class playerAOELogic : MonoBehaviour
     public float coolDownTimer = 0;
 
     private playerLoadout currentSettings;
+    private Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
         currentSettings = GetComponent<playerLoadout>();
+        anim = GetComponent<Animator>();
         coolDown = currentSettings.coolDownAOE;
         coolDownTimer = coolDown;
     }
@@ -24,6 +26,7 @@ public class playerAOELogic : MonoBehaviour
         if (Input.GetMouseButton(1) && coolDownTimer >= coolDown)
         {
             createAOEAttack();
+            anim.SetTrigger("attack");
             coolDownTimer = 0;
             gameStateManager.Instance.playerOnAOE(coolDown);
         }

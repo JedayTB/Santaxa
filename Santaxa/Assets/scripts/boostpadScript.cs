@@ -12,15 +12,19 @@ public class boostpadScript : MonoBehaviour
     [SerializeField]
     private Animator playerAnimator;
     void Start()
-    {        
+    {   
+        /*     
         playerRB = gameStateManager.Instance.playerRB2D;
         if(playerRB == null){
             Debug.LogError($"{this.gameObject.name} player rb2d null!");
         }
+        
+
         playerAnimator = gameStateManager.Instance.playerAnimator;
         if( playerAnimator == null) {
             print("bhu");
         }
+        */
         
     }
     private void OnTriggerEnter2D(Collider2D collision)

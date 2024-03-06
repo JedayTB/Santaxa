@@ -79,26 +79,16 @@ public class playerBullet : MonoBehaviour
     {
         //Debug.Log($"collides with {other.gameObject.tag}");
         //Check if object is hittable
+        print(other.gameObject.tag );
         if(other.gameObject.tag != "PLAYER"){
             hittableObject hitThis = other.gameObject.GetComponent<hittableObject>();
             if(hitThis != null){
                 hitThis.onHit(this.damage);
                 penetrationCount -= 1;
-            }else{
-                //Peak game design student code right here
-                if(other.gameObject.CompareTag("cover")){
-                    if (bounceActive) // love a good triple nested if (ik it could be simplier but honestly this is funny)
-                    {
-                        print("bounce!");
-                        flipDirection();
-                    }
-                    else
-                    {
-                        Destroy(this.gameObject);
-                    }
-                    
-                }
             }
+        }else if(other.gameObject.tag == "cover"){
+            print("KILL ME!");
+            Destroy(this.gameObject);
         }
     }
 }

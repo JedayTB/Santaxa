@@ -4,7 +4,7 @@ public class playerAOEAttack : MonoBehaviour
 {
     [SerializeField]
     private int damage = 3;
-    private Vector2 size = new Vector2(6.6f, 3.6f);
+    private Vector2 size = new Vector2(3f, 2.5f);
     private float objectLifeTime = 1;
 
     SpriteRenderer sr;

@@ -9,11 +9,13 @@ public class playerShootLogic : MonoBehaviour
     public float coolDown;
     [SerializeField]
     private float cooldownTimer;
+    private Animator anim;
 
     public static bool bouncyBool = false; // i'm not gonna lie i have NO IDEA what static actually means all i know is it lets me reference it from other scripts LMAO
 
     private void Start()
     {
+        anim = GetComponent<Animator>();
         currentSettings = GetComponent<playerLoadout>();
         if(currentSettings == null){
             Debug.LogError($"{this.gameObject.tag} DOES NOT HAVE PLAYER LOADOUT");
@@ -27,21 +29,24 @@ public class playerShootLogic : MonoBehaviour
         if (Input.GetButton("Fire1") && cooldownTimer >= coolDown)
         {
             shootLogic();
-            //ineficient. find event way to do.
+            anim.SetTrigger("attack");
+            //ineficient. find event way to do. // What is blud on about (me)
             cooldownTimer = 0;
-        }
 
+        }
+        //No bouncy
+        /*
         if (Input.GetKeyDown(KeyCode.B)) // press b to bouncy
         {
             bouncyBool = !bouncyBool;
             print("Bouncy is " + bouncyBool);
         }
+        */
     }
     //To be run inside the playerLoadout Script
     public void updateCoolDown(float newVal)
     {
         this.coolDown = newVal;
-        
     }
     private void shootLogic()
     {

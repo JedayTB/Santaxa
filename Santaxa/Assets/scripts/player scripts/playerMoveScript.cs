@@ -16,15 +16,18 @@ public class playerMoveScript : MonoBehaviour
     [SerializeField]
     private float dashCountDown;
     public float dashDuration;
-
+    private Animator anim;
     private SpriteRenderer ownSprite;
     
     private Vector2 moveDirection;
+    [SerializeField]
+    private bool determineIfMove;
     // Update is called once per frame
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         ownSprite = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
         dashCountDown = dashCoolDown; //to dash right away
     }
     void Update()
@@ -54,7 +57,8 @@ public class playerMoveScript : MonoBehaviour
         }
         flipSprite();
         moveDirection *= speed * Time.deltaTime;
-        
+        determineIfMove = moveDirection.x != 0 || moveDirection.y != 0;
+        anim.SetBool("isWalking", determineIfMove);
         transform.Translate(moveDirection);
     }
     
